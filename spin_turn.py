@@ -20,6 +20,8 @@ def main():
                 print 'Took turn in %.2fs. (%s, %s)' % (time.time() - start, player['x'], player['y'])
 
                 for event in player.retrieve_events(since=latest_event):
+                    latest_event = event['_time']
+                    
                     print event['message']
         except IdleLandsException, e:
             traceback.print_exc()

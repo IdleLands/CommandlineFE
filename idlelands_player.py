@@ -20,6 +20,7 @@ class IdleLandsPlayer(object):
         for event in self.data['recentEvents']:
             timestamp = self._parse_timestamp(event['createdAt'])
             if timestamp > since:
+                event['_time'] = timestamp
                 events.append(event)
 
         return events
