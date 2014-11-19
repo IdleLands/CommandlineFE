@@ -2,6 +2,7 @@ import requests
 import json
 import os
 from simplejson.decoder import JSONDecodeError
+from idlelands_player import IdleLandsPlayer
 
 API_ROOT = 'http://api.idle.land'
 API_ROOT_DIRECT = 'http://192.99.68.70'
@@ -93,7 +94,7 @@ class IdleLandsAPI(object):
         }, direct=direct)
 
     def turn(self):
-        return self.request(POST, '/player/action/turn', {})['player']
+        return IdleLandsPlayer(self.request(POST, '/player/action/turn', {})['player'])
 
     ###################
     ### Player Auth ###

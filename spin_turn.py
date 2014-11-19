@@ -4,6 +4,8 @@ import time
 
 
 def main():
+    latest_event = time.time()
+
     idle = IdleLandsAPI.from_config(direct=True)
     while True:
         try:
@@ -16,6 +18,9 @@ def main():
                 start = time.time()
                 player = idle.turn()
                 print 'Took turn in %.2fs. (%s, %s)' % (time.time() - start, player['x'], player['y'])
+
+                for event in player.retrieve_events(since=latest_event):
+                    print event['message']
         except IdleLandsException, e:
             traceback.print_exc()
         except Exception:
